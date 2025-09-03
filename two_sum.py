@@ -48,4 +48,27 @@ def solve(nums:list[int], target:int) -> bool:
 --------------------------------------------------------------------------------------------------------------------------
 Approach 2
 --------------------------------------------------------------------------------------------------------------------------
-  
+  def binarySearch(nums:list[int], comp:int, start:int, end: int):
+    mid = (start + end) //2
+    
+    while (start <= end):
+        if (nums[mid] == comp):
+            return comp
+        elif (nums[mid] < comp):
+            start = mid+1
+        else:
+            end = mid-1
+        mid = (start + end) //2
+
+    return -1
+
+
+def solve(nums:list[int], target:int):
+   nums = sorted(nums)
+   
+   for i in range(len(nums)):
+       comp = target - nums[i]
+       comp = binarySearch(nums, comp, i+1, len(nums)-1)
+       if(comp != -1):
+            return (nums[i], comp)
+   return None

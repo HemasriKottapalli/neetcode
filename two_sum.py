@@ -32,7 +32,7 @@
 if __name__ == "__main__":
     nums = [3,4,5,6]
     target = 7
-    solve(nums, target)
+    print(solve(nums, target)
 
 --------------------------------------------------------------------------------------------------------------------------
 Approach 1
@@ -45,6 +45,8 @@ def solve(nums:list[int], target:int) -> bool:
                 return True
     return False
 
+T.C : O(n^2)
+S.C : O(1)
 --------------------------------------------------------------------------------------------------------------------------
 Approach 2
 --------------------------------------------------------------------------------------------------------------------------
@@ -53,14 +55,14 @@ Approach 2
     
     while (start <= end):
         if (nums[mid] == comp):
-            return comp
+            return True
         elif (nums[mid] < comp):
             start = mid+1
         else:
             end = mid-1
         mid = (start + end) //2
 
-    return -1
+    return False
 
 
 def solve(nums:list[int], target:int):
@@ -68,7 +70,43 @@ def solve(nums:list[int], target:int):
    
    for i in range(len(nums)):
        comp = target - nums[i]
-       comp = binarySearch(nums, comp, i+1, len(nums)-1)
-       if(comp != -1):
-            return (nums[i], comp)
-   return None
+       ans = binarySearch(nums, comp, i+1, len(nums)-1)
+       if(ans):
+            return True
+   return False
+
+T.C : O(nlogn)
+S.C : O(1)
+--------------------------------------------------------------------------------------------------------------------------
+Approach 3
+--------------------------------------------------------------------------------------------------------------------------
+def solve(nums:list[int], target:int):
+   nums = sorted(nums)
+   i=0
+   j=len(nums)-1
+   while(i<j ):
+       if(nums[i] + nums[j] == target):
+           return True
+       elif (nums[i] + nums[j] < target):
+           i += 1
+       else:
+           j -= 1
+   return False
+
+T.C : O(nlogn)
+S.C : O(1)
+--------------------------------------------------------------------------------------------------------------------------
+Approach 4
+--------------------------------------------------------------------------------------------------------------------------
+def solve(nums:list[int], target:int):
+    dict = {}
+    for i in range(len(nums)):
+        comp = target - nums[i]
+        if comp in dict:
+            return [dict[comp], i]
+        else :
+            dict[nums[i]] = i
+    return None
+
+T.C : O(n)
+S.C : O(n)

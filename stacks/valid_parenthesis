@@ -1,0 +1,60 @@
+// You are given a string s consisting of the following characters: '(', ')', '{', '}', '[' and ']'.
+
+// The input string s is valid if and only if:
+
+// Every open bracket is closed by the same type of close bracket.
+// Open brackets are closed in the correct order.
+// Every close bracket has a corresponding open bracket of the same type.
+// Return true if s is a valid string, and false otherwise.
+
+// Example 1:
+
+// Input: s = "[]"
+
+// Output: true
+// Example 2:
+
+// Input: s = "([{}])"
+
+// Output: true
+// Example 3:
+
+// Input: s = "[(])"
+
+// Output: false
+// Explanation: The brackets are not closed in the correct order.
+
+// Constraints:
+
+// 1 <= s.length <= 1000
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+#Driver Code
+s = "([{}])"
+print(is_valid_parenthesis(s))
+---------------------------------------------------------------------------------------------------------------------------------------------
+Approach
+--------------------------------------------------------------------------------------------------------------------------------------------
+from collections import deque
+
+def is_valid_parenthesis(s:str)->bool:
+    stack = deque()
+    for i in s:
+        if i=='(' or i == '{' or i == '[':
+            stack.append(i)
+        else:
+            if not stack:
+                return False
+            else :
+                element = stack.pop()
+            if element == '(' and i == ')' or element == '[' and i == ']' or element == '{' and i == '}':
+                    continue
+            else:
+                return False
+    if not stack:
+        return True
+    else 
+        return False
+
+      T.C : O(n)
+      S.C : O(n)

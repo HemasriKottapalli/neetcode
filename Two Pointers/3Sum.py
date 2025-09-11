@@ -53,3 +53,23 @@ S.C : O(n)
 ------------------------------------------------------------------------------------------------
 Approach 2:
 ------------------------------------------------------------------------------------------------
+def get_triplets(nums : list[int]) -> list[list[int]]:
+    ans = set()
+    nums.sort()
+    for i in range(len(nums)):
+        left = i+1
+        right = len(nums)-1
+        
+        while left < right:
+            if nums[i]+nums[left]+nums[right] == 0:
+                ans.add((nums[i], nums[left], nums[right]))
+                left += 1
+                right -= 1
+            elif nums[i]+nums[left]+nums[right] < 0:
+                left += 1
+            else:
+                right -= 1
+    return [x for x in ans]
+
+T.C : O(n^2)
+S.C : O(n)

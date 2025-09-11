@@ -1,0 +1,57 @@
+You are given an integer array heights where heights[i] represents the height of the ith bar
+// You may choose any two bars to form a container. Return the maximum amount of water a container can store.
+
+// Example 1:
+// Input: height = [1,7,2,5,4,7,3,6]
+
+// Output: 36
+// Example 2:
+
+// Input: height = [2,2,2]
+
+// Output: 4
+// Constraints:
+
+// 2 <= height.length <= 1000
+// 0 <= height[i] <= 1000
+------------------------------------------------------------------------------------------------------
+#Driver Code
+heights = [1,7,2,5,12,3,500,500,7,8,4,7,3,6]
+print(get_container_with_most_water(heights))
+------------------------------------------------------------------------------------------------------
+Approach 1:
+------------------------------------------------------------------------------------------------------
+def get_container_with_most_water(heights: list[int]) -> int:
+    max_area = 0
+    for i in range(len(heights)):
+        for j in range(i+1, len(heights)):
+            width = j-i
+            length = min(heights[i], heights[j])
+            area = width * length
+            max_area = max(max_area, area)
+    return max_area
+
+  T.C : O(n^2)
+  S.C : O(1)
+------------------------------------------------------------------------------------------------------
+Approach 2:
+------------------------------------------------------------------------------------------------------
+  def get_container_with_most_water(heights: list[int]) -> int:
+    max_area = 0
+    rp = 0
+    lp = len(heights)-1
+    while(rp < lp):
+        width = lp-rp
+        height = min(heights[lp], heights[rp])
+        area = width * height
+        
+        max_area = max(max_area, area)
+        
+        if(heights[rp] < heights[lp]):
+            rp += 1
+        else:
+            lp -= 1
+    return max_area
+
+  T.C : O(n)
+  S.C : O(1)

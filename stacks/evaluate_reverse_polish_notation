@@ -1,0 +1,50 @@
+-- You are given an array of strings tokens that represents a valid arithmetic expression in Reverse Polish Notation.
+
+-- Return the integer that represents the evaluation of the expression.
+
+-- The operands may be integers or the results of other operations.
+-- The operators include '+', '-', '*', and '/'.
+-- Assume that division between integers always truncates toward zero.
+-- Example 1:
+
+-- Input: tokens = ["1","2","+","3","*","4","-"]
+
+-- Output: 5
+
+-- Explanation: ((1 + 2) * 3) - 4 = 5
+-- Constraints:
+
+-- 1 <= tokens.length <= 1000.
+-- tokens[i] is "+", "-", "*", or "/", or a string representing an integer in the range [-100, 100].
+
+-----------------------------------------------------------------------------------------------------------
+from collections import deque
+
+def get_result(tokens :list[str]) -> int:
+    stack = deque()
+    
+    for i in tokens:
+        if i not in '/*+-':
+            stack.append(i)
+        else:
+            op2 = int(stack.pop())
+            op1 = int(stack.pop())
+            if i == '+':
+                ans = op1+op2
+            elif i == '-':
+                ans = op1-op2
+            elif i == '*':
+                ans = op1*op2
+            elif i == '/':
+                ans = op1/op2
+            stack.append(ans)
+    return stack.pop()
+
+#Driver Code
+tokens = ["1","2","+","3","*","4","-"]
+print(get_result(tokens))
+
+-----------------------------------------------------------------------------------------------------------
+
+T.C: O(n)
+S.C: O(n)
